@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
-import images from './data.js';
 import ImageItem from'./imageItem';
 
-
 export default class ImageList extends Component {
-    state = { selected: null }
+    state = {selected: null};
     handleChange = (e) => {
         this.setState({ selected: e.target.value });
     };
+
     render() {
-        return <main>
+        return (<main>
                 <section id='selector'>
                     <select className='dropDown' onChange={this.handleChange}>
                         <option value='' defaultValue>All</option>
@@ -30,19 +29,19 @@ export default class ImageList extends Component {
                 <section id='results'>
                     <ul className='organismList'>
                         {
-                            images
-                            .filter(creature => {
-                                if (!this.state.selected) 
-                                return true;
+                            this.props.array
+                                .filter(object => {
+                                   if (!this.state.selected) 
+                                   return true;
 
-                                return creature.keyword === this.state.selected;
-                            }).map(creature => {
-                                return <ImageItem organism={creature}/>
-                            })     
+                                   return object.keyword === this.state.selected;
+                                }).map(object => {
+                                    return <ImageItem organism={object}/>
+                                })
                         }
-                    </ul>
-              </section>
-            </main>
-        
+                            </ul>
+                </section>
+                </main>
+        )
     }
-}
+};
